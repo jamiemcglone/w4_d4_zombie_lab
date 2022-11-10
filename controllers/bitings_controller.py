@@ -21,8 +21,8 @@ def new_bitings():
 # CREATE
 @bitings_blueprint.route("/bitings", methods=["POST"])
 def create_bitings():
-    human = request.form["human_id"]
-    zombie = request.form["zombie_id"]
+    human = human_repository.select(request.form["human_id"])
+    zombie = zombie_repository.select(request.form["zombie_id"])
     new_biting = Biting(human, zombie)
     biting_repository.save(new_biting)
     return redirect("/bitings")
